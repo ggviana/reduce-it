@@ -12,8 +12,38 @@
 
 		},
 
+		chain (arr) {
+			function chainer (collection) {
+				var self = {
+					get () {
+						return collection
+					}
+				}
+
+				for( var method in _ ) {
+					if (typeof _[method] === 'function') {
+						(function (oldMethod) {
+							self[method] = function () {
+								var args = _.toArray(arguments)
+								args.unshift(collection)
+
+								return chainer(oldMethod.apply(null, args))
+							}
+						})(_[method])
+					} else {
+						self[method] = _[method]
+					}
+
+				}
+
+				return self
+			}
+
+			return chainer(arr)
+		},
+
 		reduce (arr, callback, initalValue) {
-			var args = arguments.slice()
+			var args = _.toArray(arguments)
 
 			if (args.length === 2)
 				return arr.reduce(callback)
@@ -29,9 +59,9 @@
 
 		map (arr, callback) {
 			return _.reduce(arr, function (collection, value, index, arr) {
-				arr.push(callback(value, index, arr))
+				collection.push(callback(value, index, arr))
 
-				return arr
+				return collection
 			}, [])
 		},
 
@@ -73,6 +103,10 @@
 
 				return collection
 			}, [])
+		},
+
+		toArray (arrlike) {
+			return Array.prototype.slice.call(arrlike)
 		},
 
 		groupBy (arr, key) {
@@ -121,21 +155,21 @@
 				_.indexes(arr).sort(_.util.desc),
 				function (index) {
 					return arr[index]
-				}
+				})
 		},
 
 		max (arr) {
 			return _.reduce(arr, function (current, value) {
 				if (current < value) return value
 				return current
-			}, firstOr(arr, -Infinity))
+			}, _.util.firstOr(arr, -Infinity))
 		},
 
 		min (arr) {
 			return _.reduce(arr, function (current, value) {
 				if (current > value) return value
 				return current
-			}, firstOr(arr, Infinity))
+			}, _.util.firstOr(arr, Infinity))
 		},
 
 	}
