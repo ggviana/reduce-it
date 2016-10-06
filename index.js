@@ -76,17 +76,19 @@
 		},
 
 		some (arr, callback) {
-			return _.filter(
-				_.map(arr, callback),
-				_.util.truthy
-			).length > 0
+			return _.chain(arr)
+				.map(callback)
+				.filter(_.util.truthy)
+				.get()
+				.length > 0
 		},
 
 		every (arr, callback) {
-			return _.filter(
-				_.map(arr, callback),
-				_.util.truthy
-			).length === arr.length
+			return _.chain(arr)
+				.map(callback)
+				.filter(_.util.truthy)
+				.get()
+				.length === arr.length
 		},
 
 		flatten (arr) {
@@ -110,13 +112,15 @@
 		},
 
 		groupBy (arr, key) {
-			return _.map(
-				_.unique( _.extract(arr, key) ),
-				function (item) {
-					return _.filter(arr, function (group) {
+			return _.chain(arr)
+				.extract(key)
+				.unique()
+				.map(function (group) {
+					return _.filter(arr, function (item) {
 						return item[key] === group
 					})
 				})
+				.get()
 		},
 
 		indexes (arr) {
@@ -151,11 +155,17 @@
 		},
 
 		reverse (arr) {
-			return _.map( 
-				_.indexes(arr).sort(_.util.desc),
-				function (index) {
+			return _.chain(arr)
+				.indexes()
+				.sort(_.util.desc)
+				.map(function (index) {
 					return arr[index]
 				})
+				.get()
+		},
+
+		sort (arr, callback) {
+			return arr.sort(callback)
 		},
 
 		max (arr) {
