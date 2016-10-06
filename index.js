@@ -8,7 +8,7 @@
 			desc (a, b) { return a < b },
 			truthy (value) { return value === true },
 			firstOr (arr, value) { return arr.length ? arr[0] : value },
-			inArray (arr, value) { return ~arr.indexOf(value) }
+			inArray (arr, value) { return Boolean(~arr.indexOf(value)) }
 
 		},
 
