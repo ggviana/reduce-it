@@ -152,6 +152,10 @@
       })
     },
 
+    find (arr, callback) {
+      return _.util.firstOr(_.filter(arr, callback), undefined)
+    },
+
     fill (arr, target) {
       return _.map(arr, function (value, index, arr) {
         return (typeof target === 'function')
