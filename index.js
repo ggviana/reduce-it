@@ -186,7 +186,7 @@
         return (current < value)
           ? value
           : current
-      }, _.util.firstOr(arr, -Infinity))
+      }, _.util.firstOr(arr, Infinity))
     },
 
     min (arr) {
@@ -194,7 +194,7 @@
         return (current > value)
           ? value
           : current
-      }, _.util.firstOr(arr, Infinity))
+      }, _.util.firstOr(arr, -Infinity))
     },
 
   }
