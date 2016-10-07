@@ -1,4 +1,5 @@
 ;(function (root) {
+  'use strict'
 
   var _ = {
 
@@ -187,6 +188,11 @@
 
   }
 
-  root._ = root.reduceIt = _
+  // If it's a nodejs enviroment, export it. Othewise assume enviroment is a browser.
+  if (module && module.exports) {
+    module.exports = _
+  } else {
+    root._ = root.reduceIt = _
+  }
 
 }(this));
