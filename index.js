@@ -47,12 +47,9 @@
     },
 
     reduce (arr, callback, initalValue) {
-      var args = _.toArray(arguments)
-
-      if (args.length === 2)
-        return arr.reduce(callback)
-
-      return arr.reduce(callback, initalValue)
+      return (arguments.length > 2)
+        ? arr.reduce(callback, initalValue)
+        : arr.reduce(callback)
     },
     
     each (arr, callback) {
@@ -153,8 +150,9 @@
 
     fill (arr, target) {
       return _.map(arr, function (value, index, arr) {
-        if (typeof target === 'function') return target(value, index, arr)
-        return target
+        return (typeof target === 'function')
+          ? target(value, index, arr) 
+          : target
       })
     },
 
@@ -174,15 +172,17 @@
 
     max (arr) {
       return _.reduce(arr, function (current, value) {
-        if (current < value) return value
-        return current
+        return (current < value)
+          ? value
+          : current
       }, _.util.firstOr(arr, -Infinity))
     },
 
     min (arr) {
       return _.reduce(arr, function (current, value) {
-        if (current > value) return value
-        return current
+        return (current > value)
+          ? value
+          : current
       }, _.util.firstOr(arr, Infinity))
     },
 
