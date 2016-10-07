@@ -137,9 +137,7 @@
     },
 
     head (arr) {
-      return _.filter(arr, function (_, i) {
-        return i < 0
-      })
+      return _.util.firstOr(arr, undefined)
     },
 
     tail (arr) {
