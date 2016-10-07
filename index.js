@@ -42,7 +42,7 @@
       return chainer(arr)
     },
 
-    contains (arr, item) {
+    contains (arr, value) {
       return Boolean(~arr.indexOf(value))
     },
 
