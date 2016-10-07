@@ -153,7 +153,10 @@
     },
 
     find (arr, callback) {
-      return _.util.firstOr(_.filter(arr, callback), undefined)
+      return _.chain(arr)
+        .filter(callback)
+        .head()
+        .get()
     },
 
     fill (arr, target) {
