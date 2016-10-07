@@ -7,8 +7,7 @@
       asc  (a, b) { return a > b },
       desc (a, b) { return a < b },
       truthy (value) { return value === true },
-      firstOr (arr, value) { return arr.length ? arr[0] : value },
-      inArray (arr, value) { return Boolean(~arr.indexOf(value)) }
+      firstOr (arr, value) { return arr.length ? arr[0] : value }
 
     },
 
@@ -40,6 +39,10 @@
       }
 
       return chainer(arr)
+    },
+
+    contains (arr, item) {
+      return Boolean(~arr.indexOf(value))
     },
 
     reduce (arr, callback, initalValue) {
@@ -100,7 +103,7 @@
     unique (arr) {
       return _.reduce(arr, function (collection, value) {
 
-        if (!_.util.inArray(collection, value))
+        if (!_.contains(collection, value))
           collection.push(value)
 
         return collection
