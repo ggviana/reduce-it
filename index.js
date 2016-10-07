@@ -146,6 +146,12 @@
       })
     },
 
+    take (arr, until) {
+      return _.filter(arr, function (_, i) {
+        return i < until
+      })
+    },
+
     fill (arr, target) {
       return _.map(arr, function (value, index, arr) {
         return (typeof target === 'function')
