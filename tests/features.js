@@ -78,6 +78,26 @@ describe('Features', function () {
     })
   })
 
+  describe('none()', function () {
+    it('should return a boolean', function () {
+      expect(reduce.none([3,3,3], x => x === 4)).to.be.a('boolean')
+      expect(reduce.none([1,2,3], x => x === 3)).to.be.a('boolean')
+      expect(reduce.none([3,3,3], x => x === 3)).to.be.a('boolean')
+    })
+
+    it('should return true if all elements fails the test', function () {
+      expect(reduce.none([3,3,3], x => x === 4)).to.be(true)
+    })
+
+    it('should return false if any element passes the test', function () {
+      expect(reduce.none([1,2,3], x => x === 3)).to.be(false)
+    })
+
+    it('should return false if all element passes the test', function () {
+      expect(reduce.none([3,3,3], x => x === 3)).to.be(false)
+    })
+  })
+
   describe('indexes()', function () {
     it('should return a array with indexes', function () {
       expect(reduce.indexes([1,2,3])).to.be.eql([0,1,2])
@@ -87,6 +107,7 @@ describe('Features', function () {
   describe('take()', function () {
     it('should return a array with fewer items', function () {
       expect(reduce.take([1,2,3], 2)).to.be.eql([1,2])
+      expect(reduce.take([1,2,3], 2).length).to.be.eql(2)
     })
   })
 })

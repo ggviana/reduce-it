@@ -14,6 +14,9 @@
       truthy: function (value) {
         return value === true
       },
+      falsy: function (value) {
+        return value === false
+      },
       firstOr: function (arr, value) {
         return arr.length ? arr[0] : value
       }
@@ -95,6 +98,14 @@
       return _.chain(arr)
         .map(callback)
         .filter(_.util.truthy)
+        .get()
+        .length === arr.length
+    },
+
+    none: function (arr, callback) {
+      return _.chain(arr)
+        .map(callback)
+        .filter(_.util.falsy)
         .get()
         .length === arr.length
     },
