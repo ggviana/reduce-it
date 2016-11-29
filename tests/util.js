@@ -27,6 +27,7 @@ describe('Utilities', function () {
 
   describe('truthy()', function () {
     it('should return boolean always', function () {
+      expect(reduce.util.truthy(true)).to.be.a('boolean')
       expect(reduce.util.truthy(false)).to.be.a('boolean')
     })
 
@@ -37,6 +38,22 @@ describe('Utilities', function () {
     it('should return true for true-valued inputs', function () {
       expect(reduce.util.truthy(true)).to.be(true)
       expect(reduce.util.truthy(false)).to.be(false)
+    })
+  })
+
+  describe('falsy()', function () {
+    it('should return boolean always', function () {
+      expect(reduce.util.falsy(true)).to.be.a('boolean')
+      expect(reduce.util.falsy(false)).to.be.a('boolean')
+    })
+
+    it('should return false for non-boolean inputs', function () {
+      expect(reduce.util.falsy(1)).to.be(false)
+    })
+
+    it('should return true for false-valued inputs', function () {
+      expect(reduce.util.falsy(true)).to.be(false)
+      expect(reduce.util.falsy(false)).to.be(true)
     })
   })
 
