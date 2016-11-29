@@ -40,17 +40,17 @@ describe('Utilities', function () {
     })
   })
 
-  describe('firstOr()', function () {
+  describe('first()', function () {
     it('should return first element of a array', function () {
-      expect(reduce.util.firstOr([1,2,3])).to.be(1)
+      expect(reduce.util.first([1,2,3])).to.be(1)
     })
 
-    it('should return second element when first argument is not a array or array-like', function () {
-      expect(reduce.util.firstOr(0, 1)).to.be(1)
+    it('should return undefined when first argument is not a array or array-like', function () {
+      expect(reduce.util.first(0)).to.be(undefined)
     })
 
-    it('should return undefined by default', function () {
-      expect(reduce.util.firstOr(0)).to.be(undefined)
+    it('should return undefined when the array is empty', function () {
+      expect(reduce.util.first([])).to.be(undefined)
     })
   })
 })

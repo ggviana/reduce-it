@@ -17,8 +17,8 @@
       falsy: function (value) {
         return value === false
       },
-      firstOr: function (arr, value) {
-        return arr.length ? arr[0] : value
+      first: function (arr, value) {
+        return arr[0]
       }
 
     },
@@ -155,7 +155,7 @@
     },
 
     head: function (arr) {
-      return _.util.firstOr(arr, undefined)
+      return _.util.first(arr)
     },
 
     tail: function (arr) {
@@ -204,7 +204,7 @@
         return current < value
           ? value
           : current
-      }, _.util.firstOr(arr, Infinity))
+      }, _.util.first(arr) || Infinity)
     },
 
     min: function (arr) {
@@ -212,7 +212,7 @@
         return current > value
           ? value
           : current
-      }, _.util.firstOr(arr, -Infinity))
+      }, _.util.first(arr) || -Infinity)
     },
   }
 
