@@ -1,4 +1,4 @@
-;(function (root) {
+;(function (global) {
   'use strict'
 
   var _ = {
@@ -220,7 +220,7 @@
   if (module && module.exports) {
     module.exports = _
   } else {
-    root._ = root.reduceIt = _
+    global._ = global.reduceIt = _
   }
 
 }(this));
