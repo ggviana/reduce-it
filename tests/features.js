@@ -28,6 +28,16 @@ describe('Features', function () {
     })
   })
 
+  describe('filter()', function () {
+    it('should take only elements that match', function () {
+      const data = [3,2,1,4,3,2,3]
+      const predicate = number => number === 3
+
+      expect(reduce.filter(data, predicate)).to.be.an(Array)
+      expect(reduce.filter(data, predicate)).to.be.eql([3,3,3])
+    })
+  })
+
   describe('max()', function () {
     it('should return the greater number in array', function () {
       expect(reduce.max([1,2,3])).to.be(3)
