@@ -17,13 +17,13 @@
       falsy: function (value) {
         return value === false
       },
-      first: function (arr, value) {
-        return arr[0]
+      first: function (collection, value) {
+        return collection[0]
       }
 
     },
 
-    chain: function (arr) {
+    chain: function (collection) {
       function chainer(collection) {
         var self = {
           get: function () {
@@ -31,93 +31,93 @@
           }
         }
 
-        for (var method in _) {
-          if (typeof _[method] === 'function') {
-            (function (oldMethod) {
-              self[method] = function () {
+        for (var prop in _) {
+          if (typeof _[prop] === 'function') {
+            (function (name, value) {
+              self[name] = function () {
                 var args = _.toArray(arguments)
                 args.unshift(collection)
 
-                return chainer(oldMethod.apply(null, args))
+                return chainer(value.apply(null, args))
               }
-            })(_[method])
+            })(prop, _[prop])
           } else {
-            self[method] = _[method]
+            self[prop] = _[prop]
           }
         }
 
         return self
       }
 
-      return chainer(arr)
+      return chainer(collection)
     },
 
-    contains: function (arr, value) {
-      return Boolean(~arr.indexOf(value))
+    contains: function (collection, value) {
+      return Boolean(~collection.indexOf(value))
     },
 
-    reduce: function (arr, callback, initalValue) {
+    reduce: function (collection, predicate, initialValue) {
       return arguments.length > 2
-        ? arr.reduce(callback, initalValue)
-        : arr.reduce(callback)
+        ? collection.reduce(predicate, initialValue)
+        : collection.reduce(predicate)
     },
 
-    each: function (arr, callback) {
-      return _.reduce(arr, function (collection, value, index, arr) {
-        callback(value, index, arr)
+    each: function (collection, predicate) {
+      return _.reduce(collection, function (collection, value, index) {
+        predicate(value, index, collection)
       }, undefined)
     },
 
-    map: function (arr, callback) {
-      return _.reduce(arr, function (collection, value, index, arr) {
-        collection.push(callback(value, index, arr))
+    map: function (collection, predicate) {
+      return _.reduce(collection, function (collection, value, index) {
+        collection.push(predicate(value, index, collection))
 
         return collection
       }, [])
     },
 
-    filter: function (arr, callback) {
-      return _.reduce(arr, function (collection, value, index, arr) {
+    filter: function (collection, predicate) {
+      return _.reduce(collection, function (collection, value, index) {
 
-        if (_.util.truthy(callback(value, index, arr)))
+        if (_.util.truthy(predicate(value, index, collection)))
           collection.push(value)
 
         return collection
       }, [])
     },
 
-    some: function (arr, callback) {
-      return _.chain(arr)
-        .map(callback)
+    some: function (collection, predicate) {
+      return _.chain(collection)
+        .map(predicate)
         .filter(_.util.truthy)
         .get()
         .length > 0
     },
 
-    every: function (arr, callback) {
-      return _.chain(arr)
-        .map(callback)
+    every: function (collection, predicate) {
+      return _.chain(collection)
+        .map(predicate)
         .filter(_.util.truthy)
         .get()
-        .length === arr.length
+        .length === collection.length
     },
 
-    none: function (arr, callback) {
-      return _.chain(arr)
-        .map(callback)
+    none: function (collection, predicate) {
+      return _.chain(collection)
+        .map(predicate)
         .filter(_.util.falsy)
         .get()
-        .length === arr.length
+        .length === collection.length
     },
 
-    flatten: function (arr) {
-      return _.reduce(arr, function (collection, value) {
+    flatten: function (collection) {
+      return _.reduce(collection, function (collection, value) {
         return collection.concat(value)
       }, [])
     },
 
-    unique: function (arr) {
-      return _.reduce(arr, function (collection, value) {
+    unique: function (collection) {
+      return _.reduce(collection, function (collection, value) {
 
         if (!_.contains(collection, value))
           collection.push(value)
@@ -126,93 +126,93 @@
       }, [])
     },
 
-    toArray: function (arrlike) {
-      return Array.prototype.slice.call(arrlike)
+    toArray: function (arraylike) {
+      return Array.prototype.slice.call(arraylike)
     },
 
-    groupBy: function (arr, key) {
-      return _.chain(arr)
+    groupBy: function (collection, key) {
+      return _.chain(collection)
         .extract(key)
         .unique()
         .map(function (group) {
-          return _.filter(arr, function (item) {
+          return _.filter(collection, function (item) {
             return item[key] === group
           })
         })
         .get()
     },
 
-    indexes: function (arr) {
-      return _.map(arr, function (_, index) {
+    indexes: function (collection) {
+      return _.map(collection, function (_, index) {
         return index
       })
     },
 
-    extract: function (arr, key) {
-      return _.map(arr, function (item) {
+    extract: function (collection, key) {
+      return _.map(collection, function (item) {
         return item[key]
       })
     },
 
-    head: function (arr) {
-      return _.util.first(arr)
+    head: function (collection) {
+      return _.util.first(collection)
     },
 
-    tail: function (arr) {
-      return _.filter(arr, function (_, i) {
+    tail: function (collection) {
+      return _.filter(collection, function (_, i) {
         return i > 0
       })
     },
 
-    take: function (arr, until) {
-      return _.filter(arr, function (_, i) {
+    take: function (collection, until) {
+      return _.filter(collection, function (_, i) {
         return i < until
       })
     },
 
-    find: function (arr, callback) {
-      return _.chain(arr)
-        .filter(callback)
+    find: function (collection, predicate) {
+      return _.chain(collection)
+        .filter(predicate)
         .head()
         .get()
     },
 
-    fill: function (arr, target) {
-      return _.map(arr, function (value, index, arr) {
+    fill: function (collection, target) {
+      return _.map(collection, function (value, index, collection) {
         return typeof target === 'function'
-          ? target(value, index, arr)
+          ? target(value, index, collection)
           : target
       })
     },
 
-    reverse: function (arr) {
-      return _.chain(arr)
+    reverse: function (collection) {
+      return _.chain(collection)
         .indexes()
         .sort(_.util.desc)
         .map(function (index) {
-          return arr[index]
+          return collection[index]
         })
         .get()
     },
 
-    sort: function (arr, callback) {
-      return arr.sort(callback)
+    sort: function (collection, predicate) {
+      return collection.sort(predicate)
     },
 
-    max: function (arr) {
-      return _.reduce(arr, function (current, value) {
+    max: function (collection) {
+      return _.reduce(collection, function (current, value) {
         return current < value
           ? value
           : current
-      }, _.util.first(arr) || Infinity)
+      }, _.util.first(collection) || Infinity)
     },
 
-    min: function (arr) {
-      return _.reduce(arr, function (current, value) {
+    min: function (collection) {
+      return _.reduce(collection, function (current, value) {
         return current > value
           ? value
           : current
-      }, _.util.first(arr) || -Infinity)
+      }, _.util.first(collection) || -Infinity)
     },
   }
 
