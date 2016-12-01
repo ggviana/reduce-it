@@ -216,7 +216,7 @@
     },
   }
 
-  // If it's a nodejs enviroment, export it. Othewise assume enviroment is a browser.
+  // If it's a nodejs enviroment, export it. Otherwise assume enviroment is a browser.
   if (module && module.exports) {
     module.exports = _
   } else {
