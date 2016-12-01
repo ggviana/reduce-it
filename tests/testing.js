@@ -15,6 +15,24 @@ describe('Testing', function () {
     })
   })
 
+  describe('isArray()', function () {
+    it('should always return a boolean', function () {
+      expect(reduce.isArray([1,2,3])).to.be.a('boolean')
+      expect(reduce.isArray("text")).to.be.a('boolean')
+    })
+
+    it('should return true if is an array', function () {
+      expect(reduce.isArray([1,2,3])).to.be(true)
+    })
+
+    it('should return false if is not an array', function () {
+      expect(reduce.isArray(1)).to.be(false)
+      expect(reduce.isArray(/abc/)).to.be(false)
+      expect(reduce.isArray("text")).to.be(false)
+      expect(reduce.isArray({})).to.be(false)
+    })
+  })
+
   describe('some()', function () {
     it('should return a boolean', function () {
       expect(reduce.some([1,2,3], x => x === 3)).to.be.a('boolean')

@@ -52,6 +52,10 @@
       return chainer(collection)
     },
 
+    isArray: function (value) {
+      return Object.prototype.toString.call(value) === '[object Array]'
+    },
+
     contains: function (collection, value) {
       return Boolean(~collection.indexOf(value))
     },
