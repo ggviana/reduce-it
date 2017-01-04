@@ -1,8 +1,21 @@
 ;(function (global) {
   'use strict'
 
-  var _ = {
+  // This is the hero who's going to save the day!
+  var reduce = Array.prototype.reduce
 
+  // This is his helper, consider it the Robin.
+  var copier = Array.prototype.slice
+
+  // This is a ordinary butler. :P
+  var toString = Object.prototype.toString
+
+  var _ = {
+    // Here are some utility functions.
+    // Alone they look like they don't perform anything complex,
+    // but combined as predicates they do a lot.
+    // 
+    // Just so you know
     util: {
 
       asc: function (a, b) {
@@ -53,7 +66,7 @@
     },
 
     isArray: function (value) {
-      return Object.prototype.toString.call(value) === '[object Array]'
+      return toString.call(value) === '[object Array]'
     },
 
     contains: function (collection, value) {
@@ -62,8 +75,8 @@
 
     reduce: function (collection, predicate, initialValue) {
       return arguments.length > 2
-        ? collection.reduce(predicate, initialValue)
-        : collection.reduce(predicate)
+        ? reduce.call(collection, predicate, initialValue)
+        : reduce.call(collection, predicate)
     },
 
     each: function (collection, predicate) {
@@ -131,7 +144,7 @@
     },
 
     toArray: function (arraylike) {
-      return Array.prototype.slice.call(arraylike)
+      return copier.call(arraylike)
     },
 
     groupBy: function (collection, key) {
