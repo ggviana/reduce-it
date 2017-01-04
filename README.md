@@ -10,7 +10,7 @@ On one of São Paulo's hottest nights, three developers gather in a bar to satis
 
 -- Your talking about the programming style that uses only functions aren't you? That can't be true, in some place you'll have to use the other language keywords -- Argued developer02.
 
--- Well, that actually might make sense... I'll give a try, and start a project to do the _all kinds of collection manipulations_. -- I said.
+-- Well developer01, that actually might make sense... I'll give a try, and start a project to do the _all kinds of collection manipulations_. -- I said.
 
 -- Your are wasting your time! -- Challenged developer02.
 
