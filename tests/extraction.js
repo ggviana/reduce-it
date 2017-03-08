@@ -23,12 +23,6 @@ describe('Extraction', function () {
     })
   })
 
-  describe('indexes()', function () {
-    it('should return a array with indexes', function () {
-      expect(reduce.indexes([1,2,3])).to.be.eql([0,1,2])
-    })
-  })
-
   describe('keys()', function () {
     it('should return a array with the object keys', function () {
       expect(reduce.keys([1,2,3])).to.be.eql([0,1,2])

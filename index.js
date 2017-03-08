@@ -159,12 +159,6 @@
         .get()
     },
 
-    indexes: function (collection) {
-      return _.map(collection, function (_, index) {
-        return index
-      })
-    },
-
     extract: function (collection, key) {
       return _.map(collection, function (item) {
         return item[key]
@@ -204,7 +198,7 @@
 
     reverse: function (collection) {
       return _.chain(collection)
-        .indexes()
+        .keys()
         .sort(_.util.desc)
         .map(function (index) {
           return collection[index]
