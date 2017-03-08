@@ -44,20 +44,20 @@
           }
         }
 
-        for (var prop in _) {
-          if (typeof _[prop] === 'function') {
-            (function (name, value) {
-              self[name] = function () {
-                var args = _.toArray(arguments)
-                args.unshift(collection)
+        var prototype = _.keys(_)
 
-                return chainer(value.apply(null, args))
-              }
-            })(prop, _[prop])
+        _.each(prototype, function (prop) {
+          if (typeof _[prop] === 'function') {
+            self[prop] = function () {
+              var args = _.toArray(arguments)
+              args.unshift(collection)
+
+              return chainer(_[prop].apply(null, args))
+            }
           } else {
             self[prop] = _[prop]
           }
-        }
+        })
 
         return self
       }
