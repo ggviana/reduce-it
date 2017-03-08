@@ -231,6 +231,19 @@
           : current
       }, _.util.first(collection) || -Infinity)
     },
+
+    keys: function (collection) {
+      var hasOwnProp = Object.prototype.hasOwnProperty
+      var keys = []
+
+      for (var key in collection) {
+        if (hasOwnProp.call(collection, key)) {
+          keys.push(key)
+        }
+      }
+
+      return keys
+    },
   }
 
   // If it's a nodejs enviroment, export it. Otherwise assume enviroment is a browser.
