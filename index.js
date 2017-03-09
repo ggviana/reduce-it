@@ -72,6 +72,10 @@
       return toString.call(value) === '[object Array]'
     },
 
+    count: function (collection) {
+      return _.toArray(collection).length
+    },
+
     contains: function (collection, value) {
       return Boolean(~collection.indexOf(value))
     },

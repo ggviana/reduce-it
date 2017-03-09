@@ -17,4 +17,18 @@ describe('Transformation', function () {
     })
   })
 
+  describe('count()', function () {
+    it('should return the number of item in a collection', function () {
+      const objWithLength = {
+        [0]: 1,
+        [1]: 2,
+        [2]: 3,
+        length: 3
+      }
+
+      expect(reduce.count(objWithLength)).to.be.eql(3)
+      expect(reduce.count([1,2,3,4,5])).to.be.eql(5)
+    })
+  })
+
 })
