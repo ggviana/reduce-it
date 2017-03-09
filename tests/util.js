@@ -70,4 +70,18 @@ describe('Utilities', function () {
       expect(reduce.util.first([])).to.be(undefined)
     })
   })
+
+  describe('last()', function () {
+    it('should return last element of a array', function () {
+      expect(reduce.util.last([1,2,3])).to.be(3)
+    })
+
+    it('should return undefined when last argument is not a array or array-like', function () {
+      expect(reduce.util.last(0)).to.be(undefined)
+    })
+
+    it('should return undefined when the array is empty', function () {
+      expect(reduce.util.last([])).to.be(undefined)
+    })
+  })
 })

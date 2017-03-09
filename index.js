@@ -30,9 +30,12 @@
       falsy: function (value) {
         return value === false
       },
-      first: function (collection, value) {
+      first: function (collection) {
         return collection[0]
-      }
+      },
+      last: function (collection) {
+        return collection[collection.length - 1]
+      },
 
     },
 
