@@ -35,4 +35,11 @@ describe('Filters', function () {
       expect(reduce.takeAt([1,2,3], [1, 2, 3]).length).to.be.eql(2)
     })
   })
+
+  describe('intersection()', function () {
+    it('should return a array with the intersection between the colections', function () {
+      expect(reduce.intersection([1,2,3], [1,2])).to.be.eql([1,2])
+      expect(reduce.intersection([1,2,3], [1,2], [1,3])).to.be.eql([1])
+    })
+  })
 })

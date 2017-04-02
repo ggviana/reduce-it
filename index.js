@@ -196,6 +196,16 @@
       })
     },
 
+    intersection: function (collection1 /*, collection2, collectionN */) {
+      const collections = _.toArray(arguments)
+
+      return _.reduce(collections, function (intersecting, collection) {
+          return _.filter(intersecting, function (item) {
+            return _.contains(collection, item)
+          })
+      }, collections[0] || [])
+    },
+
     find: function (collection, predicate) {
       return _.chain(collection)
         .filter(predicate)
