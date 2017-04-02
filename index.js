@@ -188,6 +188,14 @@
       })
     },
 
+    takeAt: function (collection, indexes) {
+      indexes = _.isArray(indexes) ? indexes : [indexes]
+
+      return _.filter(collection, function (value, i) {
+        return _.contains(indexes, i)
+      })
+    },
+
     find: function (collection, predicate) {
       return _.chain(collection)
         .filter(predicate)

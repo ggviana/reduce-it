@@ -26,4 +26,13 @@ describe('Filters', function () {
       expect(reduce.take([1,2,3], 2).length).to.be.eql(2)
     })
   })
+
+  describe('takeAt()', function () {
+    it('should return a array with the items specified in the indexes', function () {
+      expect(reduce.takeAt([1,2,3], 2)).to.be.eql([3])
+      expect(reduce.takeAt([1,2,3], [1, 2])).to.be.eql([2,3])
+      expect(reduce.takeAt([1,2,3], [1, 2, 3])).to.be.eql([2,3])
+      expect(reduce.takeAt([1,2,3], [1, 2, 3]).length).to.be.eql(2)
+    })
+  })
 })
