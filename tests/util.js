@@ -84,4 +84,15 @@ describe('Utilities', function () {
       expect(reduce.util.last([])).to.be(undefined)
     })
   })
+
+  describe('identity()', function () {
+    it('should return the same value that was used as its arguments', function () {
+      const array = [1,2,3]
+      const object = {}
+
+      expect(reduce.util.identity(array)).to.be(array)
+      expect(reduce.util.identity(object)).to.be(object)
+      expect(reduce.util.identity(1)).to.be(1)
+    })
+  })
 })

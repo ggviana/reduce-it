@@ -36,6 +36,9 @@
       last: function (collection) {
         return collection[collection.length - 1]
       },
+      identity: function (value) {
+        return value
+      },
 
     },
 
