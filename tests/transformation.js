@@ -31,4 +31,12 @@ describe('Transformation', function () {
     })
   })
 
+  describe('union()', function () {
+    it('should return a array with the union between the colections', function () {
+      expect(reduce.union([1,2,3], [1,2])).to.be.eql([1,2,3,1,2])
+      expect(reduce.union([1,2,3], [1,2], [1,3])).to.be.eql([1,2,3,1,2,1,3])
+      expect(reduce.union([1,2,3], 1)).to.be.eql([1,2,3,1])
+    })
+  })
+
 })

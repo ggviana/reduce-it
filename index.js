@@ -139,7 +139,7 @@
 
     flatten: function (collection) {
       return _.reduce(collection, function (collection, value) {
-        return collection.concat(value)
+        return _.union(collection, value)
       }, [])
     },
 
@@ -207,6 +207,20 @@
             return _.contains(collection, item)
           })
       }, collections[0] || [])
+    },
+
+    union: function (collection1 /*, collection2, collectionN */) {
+      const collections = _.toArray(arguments)
+
+      return _.reduce(collections, function (unioning, collection) {
+          collection = _.isArray(collection) ? collection : [collection]
+
+          _.each(collection, function (item) {
+            unioning.push(item)
+          })
+
+          return unioning
+      }, [])
     },
 
     find: function (collection, predicate) {
