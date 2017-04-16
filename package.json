@@ -4,7 +4,7 @@
   "description": "There are several things we can do with Array.prototype.reduce",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --watch tests/*"
+    "test": "mocha --watch --reporter min tests/*"
   },
   "repository": {
     "type": "git",
