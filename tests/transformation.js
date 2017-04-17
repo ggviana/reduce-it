@@ -39,4 +39,11 @@ describe('Transformation', function () {
     })
   })
 
+  describe('difference()', function () {
+    it('should return a array with the difference between the colections', function () {
+      expect(reduce.difference([1,2,3], [1,2,4])).to.be.eql([3,4])
+      expect(reduce.difference([1,2], [1,2])).to.be.eql([])
+      expect(reduce.difference([1,2,3], [1])).to.be.eql([2,3])
+    })
+  })
 })

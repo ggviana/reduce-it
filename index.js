@@ -14,7 +14,7 @@
     // Here are some utility functions.
     // Alone they look like they don't perform anything complex,
     // but combined as predicates they do a lot.
-    // 
+    //
     // Just so you know
     util: {
 
@@ -221,6 +221,17 @@
 
           return unioning
       }, [])
+    },
+
+    difference: function (collection1, collection2) {
+      return _.union(
+        _.filter(collection1, function (item) {
+          return !_.contains(collection2, item)
+        }),
+        _.filter(collection2, function (item) {
+          return !_.contains(collection1, item)
+        })
+      )
     },
 
     find: function (collection, predicate) {
